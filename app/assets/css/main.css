@@ -1,0 +1,1045 @@
+@import "tailwindcss";
+@source inline("anim-{1..10}");
+
+@variant dark (&:where(.dark, .dark *));
+
+/* ─────────────────────────────────────────────
+   1. DESIGN TOKENS — CSS custom properties
+   Single source of truth for the entire palette,
+   spacing scale, and type scale.
+   ───────────────────────────────────────────── */
+:root {
+  /* Core surfaces */
+  --color-bg:              #0A0A0A;
+  --color-surface:         #111111;
+  --color-surface-raised:  #161616;
+
+  /* Borders */
+  --color-border:          #1A2A1A;
+  --color-border-soft:     rgba(26, 42, 26, 0.6);
+
+  /* Text */
+  --color-text:            #F0F0F0;
+  --color-text-muted:      #666666;
+  --color-text-dim:        #333333;
+
+  /* Phosphor green — accent only */
+  --color-green:           #39FF14;
+  --color-green-dim:       #1A7A00;
+  --color-green-glow:      rgba(57, 255, 20, 0.15);
+  --color-green-glow-mid:  rgba(57, 255, 20, 0.08);
+
+  /* Pure */
+  --color-white:           #FFFFFF;
+  --color-black:           #000000;
+
+  /* Fonts */
+  --font-mono:             'IBM Plex Mono', 'Courier New', monospace;
+  --font-display:          'VT323', 'Share Tech Mono', monospace;
+
+  /* Fluid spacing */
+  --space-section:         clamp(4rem, 10vh, 8rem);
+  --space-content:         clamp(1rem, 3vw, 2rem);
+  --section-px:            clamp(1.5rem, 5vw, 5rem);
+  --section-py:            clamp(4rem, 10vh, 8rem);
+  --card-p:                1.25rem;
+  --grid-gap:              1px;  /* tight CRT grid seams */
+
+  /* Fluid type */
+  --text-hero:             clamp(3rem, 8vw, 7rem);
+  --text-section:          clamp(2rem, 5vw, 4rem);
+  --text-ghost:            clamp(8rem, 20vw, 16rem);
+  --text-body:             0.9rem;
+  --text-label:            0.7rem;
+  --text-terminal:         0.85rem;
+
+  --nav-height: 72px;
+}
+
+
+/* ─────────────────────────────────────────────
+   2. @theme — Tailwind v4 token registration
+   Lets you use bg-green, text-green, etc.
+   in markup alongside utility classes.
+   ───────────────────────────────────────────── */
+@theme {
+  --color-bg:           #0A0A0A;
+  --color-surface:      #111111;
+  --color-green:        #39FF14;
+  --color-green-dim:    #1A7A00;
+  --color-text:         #F0F0F0;
+  --color-text-muted:   #666666;
+  --color-black:        #0A0A0A;
+  --color-white:        #FFFFFF;
+
+  --font-mono:          'IBM Plex Mono', monospace;
+  --font-display:       'VT323', 'Share Tech Mono', monospace;
+}
+
+
+/* ─────────────────────────────────────────────
+   3. @layer base — resets, keyframes, html/body
+   ───────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    scrollbar-width: none;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-padding-top: var(--nav-height);
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  body {
+    font-family: var(--font-mono);
+    background: var(--color-bg);
+    color: var(--color-text);
+    min-height: 100dvh;
+  }
+
+  /* ── Keyframes ── */
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55%                           { opacity: 0.97; }
+  }
+
+  @keyframes slowFlicker {
+    0%, 92%, 94%, 96%, 100% { opacity: 1; }
+    93%, 95%                { opacity: 0.997; }
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  @keyframes glowPulse {
+    0%, 100% { text-shadow: 0 0 8px var(--color-green); }
+    50%      { text-shadow: 0 0 16px var(--color-green), 0 0 32px var(--color-green-dim); }
+  }
+
+  @keyframes scanlineScroll {
+    0%   { background-position: 0 0; }
+    100% { background-position: 0 4px; }
+  }
+
+  @keyframes typewriter {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+
+  @keyframes bootFade {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes cursorBounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(3px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+   4. @utility — stateless atomic utilities
+   No pseudos, no media queries, no vendor prefixes.
+   ───────────────────────────────────────────── */
+
+/* ── Typography ── */
+
+/*
+ * font-mono
+ * → All body copy, terminal lines, code
+ */
+@utility font-mono {
+  font-family: var(--font-mono);
+}
+
+/*
+ * font-display
+ * → Section headers, hero name, ghost numbers
+ */
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+/*
+ * text-hero-name
+ * → <h1> in SectionHero — the large name display
+ */
+@utility text-hero-name {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  color: var(--color-white);
+}
+
+/*
+ * text-section-heading
+ * → <h2> at top of each section
+ */
+@utility text-section-heading {
+  font-family: var(--font-display);
+  font-size: var(--text-section);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.1;
+  color: var(--color-green);
+}
+
+/*
+ * text-body
+ * → <p> — standard body copy, log entries, bio
+ */
+@utility text-body {
+  font-family: var(--font-mono);
+  font-size: var(--text-body);
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--color-text);
+}
+
+/*
+ * text-label
+ * → <span> — tags, timestamps, metadata, uppercase labels
+ */
+@utility text-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/*
+ * text-terminal
+ * → <p> — terminal lines: boot sequence, prompt text
+ */
+@utility text-terminal {
+  font-family: var(--font-mono);
+  font-size: var(--text-terminal);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-green);
+}
+
+/*
+ * text-muted
+ * → secondary copy — timestamps, subtitles
+ */
+@utility text-muted {
+  color: var(--color-text-muted);
+}
+
+/*
+ * text-dim
+ * → tertiary copy — inactive / ghost states
+ */
+@utility text-dim {
+  color: var(--color-text-dim);
+}
+
+/*
+ * text-green
+ * → active/interactive copy in phosphor green
+ */
+@utility text-green {
+  color: var(--color-green);
+}
+
+/*
+ * text-ghost-number
+ * → <span> — large decorative section counter behind content
+ *   e.g. "01", "02"
+ */
+@utility text-ghost-number {
+  font-family: var(--font-display);
+  font-size: var(--text-ghost);
+  font-weight: 400;
+  line-height: 1;
+  opacity: 0.04;
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  right: var(--section-px);
+  bottom: 1.5rem;
+}
+
+/*
+ * text-logo
+ * → Monogram / initials in topbar or favicon context
+ */
+@utility text-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--color-green);
+  text-shadow: 0 0 8px var(--color-green), 0 0 20px var(--color-green-dim);
+}
+
+
+/* ── Layout ── */
+
+/*
+ * portfolio-root
+ * → Outermost <div> wrapping the entire page
+ */
+@utility portfolio-root {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  min-height: 100dvh;
+  position: relative;
+  overflow: hidden;
+}
+
+/*
+ * content-container
+ * → <div> — max-width centered inner wrapper
+ */
+@utility content-container {
+  max-width: 760px;
+  width: 100%;
+  margin-inline: auto;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ── CRT Effect layers ── */
+
+/*
+ * crt-scanlines
+ * → Fixed overlay — horizontal scanline bands
+ *   Always pointer-events: none
+ */
+@utility crt-scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 4px
+  );
+}
+
+/*
+ * crt-vignette
+ * → Fixed overlay — dark radial vignette at edges
+ */
+@utility crt-vignette {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(0, 0, 0, 0.7) 85%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+}
+
+/*
+ * crt-wrapper
+ * → Viewport wrapper that receives CSS barrel simulation
+ *   via border-radius + perspective
+ */
+@utility crt-wrapper {
+  position: relative;
+  min-height: 100dvh;
+  border-radius: 2% / 1.5%;
+  overflow: hidden;
+  transform-style: preserve-3d;
+}
+
+/*
+ * crt-flicker
+ * → Applied to the page wrapper for slow phosphor flicker
+ */
+@utility crt-flicker {
+  animation: slowFlicker 8s steps(1) infinite;
+}
+
+/*
+ * crt-chromatic
+ * → CSS-only chromatic aberration approximation
+ *   Apply to canvas or image elements
+ */
+@utility crt-chromatic {
+  filter:
+    drop-shadow(1px 0 0 rgba(255, 0, 0, 0.12))
+    drop-shadow(-1px 0 0 rgba(0, 100, 255, 0.12));
+}
+
+
+/* ── Cards & Components ── */
+
+/*
+ * terminal-card
+ * → <div> — bordered panel styled as a terminal window
+ *   Used in About, Experience sections
+ */
+@utility terminal-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-green-dim);
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/*
+ * terminal-card-header
+ * → <div> — top bar of .terminal-card
+ *   Green bar with filename label
+ */
+@utility terminal-card-header {
+  background: var(--color-green-dim);
+  padding: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/*
+ * terminal-card-body
+ * → <div> — content area inside .terminal-card
+ */
+@utility terminal-card-body {
+  padding: var(--card-p);
+}
+
+/*
+ * proj-card
+ * → <div> — project entry in the 2-col project grid
+ */
+@utility proj-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-green-dim);
+  border-radius: 0;
+  padding: var(--card-p);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+/*
+ * widget-card
+ * → <div> — widget launcher card in PLAYGROUND section
+ */
+@utility widget-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-green-dim);
+  border-radius: 0;
+  padding: var(--card-p);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+/*
+ * exp-row
+ * → <div> — single job entry in Experience section
+ */
+@utility exp-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: 0.75rem 1rem;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+}
+
+/*
+ * tag-pill
+ * → <span> — tech stack tag on project cards
+ */
+@utility tag-pill {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-green-dim);
+  background: var(--color-surface);
+  border: 1px solid var(--color-green-dim);
+  padding: 2px 8px;
+  border-radius: 0;
+  white-space: nowrap;
+}
+
+/*
+ * tag-pill-active
+ * → modifier — highlighted / hover state tag
+ */
+@utility tag-pill-active {
+  color: var(--color-green);
+  border-color: var(--color-green);
+}
+
+/*
+ * contact-link
+ * → <a> — contact section link blocks [GITHUB] [EMAIL]
+ */
+@utility contact-link {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 1rem;
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/*
+ * dot-nav
+ * → <nav> — fixed right-edge dot navigation container
+ */
+@utility dot-nav {
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+/*
+ * dot-nav-dot
+ * → <button> — individual dot in dot nav
+ */
+@utility dot-nav-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-green-dim);
+  border: none;
+  cursor: pointer;
+  transition: width 0.3s, height 0.3s, border-radius 0.3s, background 0.3s, box-shadow 0.3s;
+  padding: 0;
+  position: relative;
+}
+
+/*
+ * dot-nav-dot-active
+ * → modifier — current visible section dot
+ */
+@utility dot-nav-dot-active {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-green);
+  box-shadow: 0 0 8px var(--color-green), 0 0 16px var(--color-green-glow);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/*
+ * prompt-line
+ * → <div> — terminal prompt row: "> text_"
+ */
+@utility prompt-line {
+  font-family: var(--font-mono);
+  font-size: var(--text-terminal);
+  color: var(--color-green);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/*
+ * prompt-prefix
+ * → <span> — the ">" character in a .prompt-line
+ */
+@utility prompt-prefix {
+  color: var(--color-green-dim);
+  user-select: none;
+}
+
+/*
+ * glow
+ * → Phosphor glow text — apply to green accent text
+ */
+@utility glow {
+  color: var(--color-green);
+  text-shadow:
+    0 0 8px var(--color-green),
+    0 0 20px var(--color-green-dim);
+}
+
+/*
+ * glow-border
+ * → Green glowing border — for hover/active states on cards
+ */
+@utility glow-border {
+  border-color: var(--color-green);
+  box-shadow:
+    0 0 12px var(--color-green-glow),
+    inset 0 0 8px var(--color-green-glow);
+}
+
+/*
+ * cursor
+ * → Animated blinking underscore cursor
+ *   ::after content injected via CSS
+ */
+.cursor::after {
+  content: '_';
+  color: var(--color-green);
+  animation: blink 1s steps(1) infinite;
+}
+
+/*
+ * btn-primary
+ * → <button> — primary CTA (e.g. "VIEW WORK")
+ */
+@utility btn-primary {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: var(--color-green);
+  border: 1px solid var(--color-green);
+  padding: 0.625rem 1.5rem;
+  border-radius: 0;
+  cursor: pointer;
+  transition: opacity 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/*
+ * btn-outline
+ * → <button> — secondary ghost CTA
+ */
+@utility btn-outline {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  padding: 0.625rem 1.5rem;
+  border-radius: 0;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/*
+ * widget-modal-overlay
+ * → <div> — full-screen modal backdrop for widget launch
+ */
+@utility widget-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9990;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/*
+ * widget-modal
+ * → <div> — modal container with CRT terminal chrome
+ */
+@utility widget-modal {
+  background: var(--color-surface);
+  border: 1px solid var(--color-green-dim);
+  border-radius: 0;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/*
+ * status-dot
+ * → <div> — live availability indicator (blinking green dot)
+ */
+@utility status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-green);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px var(--color-green);
+  animation: blink 2s steps(1) infinite;
+}
+
+/*
+ * section-divider
+ * → <div> — horizontal rule styled as terminal separator
+ */
+@utility section-divider {
+  height: 1px;
+  width: 100%;
+  margin-block: 1.5rem;
+  position: relative;
+}
+
+/*
+ * scroll-hint
+ * → <div> — "scroll down" indicator at bottom of hero
+ */
+@utility scroll-hint {
+  position: absolute;
+  bottom: 1.5rem;
+  left: var(--section-px);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ── Animation entrance utilities ── */
+
+/*
+ * anim-1 → first element to appear (eyebrow / boot line 1)
+ * anim-2 → hero name
+ * anim-3 → tagline / body
+ * anim-4 → CTA row
+ * anim-5 → late element (cursor line, stats)
+ * anim-6 → very late element (e.g. footer)
+ */
+@utility anim-1 { animation: slideUp 0.75s 0.05s both cubic-bezier(0.16, 1, 0.3, 1); }
+@utility anim-2 { animation: slideUp 0.75s 0.2s  both cubic-bezier(0.16, 1, 0.3, 1); }
+@utility anim-3 { animation: slideUp 0.75s 0.35s both cubic-bezier(0.16, 1, 0.3, 1); }
+@utility anim-4 { animation: slideUp 0.75s 0.45s both cubic-bezier(0.16, 1, 0.3, 1); }
+@utility anim-5 { animation: slideUp 0.75s 0.6s  both cubic-bezier(0.16, 1, 0.3, 1); }
+@utility anim-6 { animation: slideUp 0.75s 0.70s both cubic-bezier(0.16, 1, 0.3, 1); }
+@utility anim-fade { animation: fadeIn 0.8s 0.1s both ease-out; }
+
+
+/* ─────────────────────────────────────────────
+   5. @layer components — hover, pseudos,
+      vendor prefixes, and media queries
+   ───────────────────────────────────────────── */
+@layer components {
+  /* ── Cursor pseudo-element ── */
+  .cursor::after {
+    content: '_';
+    color: var(--color-green);
+    animation: blink 1s steps(1) infinite;
+  }
+
+  /* ── Glow text animation ── */
+  .glow {
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+
+  /* ── CRT scanlines scrolling animation (optional intensity upgrade) ── */
+  .crt-scanlines-animated {
+    animation: scanlineScroll 0.1s steps(1) infinite;
+  }
+
+  /* ── Terminal card hover ── */
+  .terminal-card:hover {
+    border-color: var(--color-green);
+    box-shadow:
+      0 0 8px var(--color-green-glow),
+      inset 0 0 4px var(--color-green-glow);
+  }
+
+  /* ── Project card hover ── */
+  .proj-card:hover {
+    border-color: var(--color-green);
+    box-shadow:
+      0 0 12px var(--color-green-glow),
+      inset 0 0 8px var(--color-green-glow);
+  }
+
+  /* proj-card corner accent (top-right decorative tick) */
+  .proj-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    border-top: 2px solid var(--color-green-dim);
+    border-right: 2px solid var(--color-green-dim);
+    transition: border-color 0.2s;
+  }
+
+  .proj-card:hover::before {
+    border-color: var(--color-green);
+  }
+
+  /* ── Widget card hover ── */
+  .widget-card:hover {
+    border-color: var(--color-green);
+    background: var(--color-surface-raised);
+    box-shadow:
+      0 0 12px var(--color-green-glow),
+      inset 0 0 6px var(--color-green-glow);
+  }
+
+  /* Widget card left accent bar */
+  .widget-card::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-green-dim);
+    transition: background 0.2s;
+  }
+
+  .widget-card:hover::before {
+    background: var(--color-green);
+    box-shadow: 2px 0 8px var(--color-green-glow);
+  }
+
+  /* ── Contact link hover ── */
+  .contact-link:hover {
+    color: var(--color-green);
+    border-color: var(--color-green);
+    box-shadow: 0 0 8px var(--color-green-glow);
+  }
+
+  /* ── Dot nav tooltip ── */
+  .dot-nav-dot::before {
+    content: attr(data-label);
+    position: absolute;
+    right: calc(100% + 0.75rem);
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.2s;
+    pointer-events: none;
+  }
+
+  .dot-nav-dot:hover::before {
+    opacity: 1;
+    color: var(--color-green);
+  }
+
+  /* ── Button hovers ── */
+  .btn-primary:hover {
+    opacity: 0.85;
+    box-shadow: 0 0 12px var(--color-green-glow);
+  }
+
+  .btn-outline:hover {
+    color: var(--color-green);
+    border-color: var(--color-green);
+    box-shadow: 0 0 8px var(--color-green-glow);
+  }
+
+  /* ── Tag pill hover ── */
+  .tag-pill:hover {
+    color: var(--color-green);
+    border-color: var(--color-green);
+  }
+
+  /* ── Scroll hint arrow bounce ── */
+  .scroll-hint-arrow {
+    display: inline-block;
+    animation: cursorBounce 1.4s ease-in-out infinite;
+  }
+
+  /* ── Experience row — log entry prefix ── */
+  .exp-row::before {
+    content: '>';
+    color: var(--color-green-dim);
+    font-family: var(--font-mono);
+    font-size: var(--text-terminal);
+    padding-top: 0.1em;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  /* ── Widget modal entrance ── */
+  .widget-modal-overlay {
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  .widget-modal {
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── Touch — hide scroll hint (users swipe) ── */
+  @media (hover: none) and (pointer: coarse) {
+    .scroll-hint { display: none; }
+    .dot-nav { display: none; }
+  }
+
+  /* ── Responsive: section padding ── */
+  @media (min-width: 640px) {
+    :root {
+      --section-px: clamp(2rem, 5vw, 3.5rem);
+      --card-p: 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --section-px: clamp(3rem, 6vw, 5rem);
+    }
+
+    /* show dot nav on tablet+ */
+    .dot-nav { display: flex; }
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --section-px: clamp(4rem, 8vw, 7rem);
+      --card-p: 1.75rem;
+    }
+  }
+
+  /* ── Reduced motion overrides ── */
+  @media (prefers-reduced-motion: reduce) {
+    .anim-1,
+    .anim-2,
+    .anim-3,
+    .anim-4,
+    .anim-5,
+    .anim-6,
+    .anim-fade {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+
+    .cursor::after { animation: none; opacity: 1; }
+    .glow          { animation: none; }
+    .status-dot    { animation: none; }
+    .crt-flicker   { animation: none; }
+    .scroll-hint-arrow { animation: none; }
+    .dot-nav-dot-active { animation: none; }
+
+    .proj-card,
+    .widget-card,
+    .contact-link,
+    .btn-primary,
+    .btn-outline,
+    .tag-pill {
+      transition: none;
+    }
+  }
+
+  .page {
+    min-height: 100dvh;
+    padding-block: var(--space-section);
+    padding-inline: var(--space-content);
+  }
+}
+
+textarea {
+  caret-shape: block;
+  caret-color: var(--color-green);
+}
+
+textarea::-webkit-scrollbar {
+  width: 0;
+}
+
+textarea::-webkit-scrollbar-button {
+  display: none;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+@keyframes scrollUp {
+  from { transform: translateY(0) translateZ(0); }
+  to { transform: translateY(-50%) translateZ(0); }
+}
+
+.animate-scroll-up {
+  animation: scrollUp 20s linear infinite;
+  animation-delay: -10s;
+  will-change: transform;
+}
