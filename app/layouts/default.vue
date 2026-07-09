@@ -3,7 +3,7 @@
     class="fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-out"
     :class="hideHeader ? '-translate-y-full' : 'translate-y-0'"
   >
-    <nav class="flex items-center justify-end p-6">
+    <nav class="flex items-center justify-end gap-3 p-4 text-xs sm:gap-6 sm:p-6 sm:text-sm">
       <NuxtLink
         v-if="currentTab !== TABS.home"
         :to="TABS.home.path"
@@ -11,7 +11,7 @@
       >
         ..
       </NuxtLink>
-      <ul class="flex gap-6">
+      <ul class="flex flex-wrap justify-end gap-3 sm:gap-6">
         <li v-for="tab in TABS" :key="tab.title">
           <NuxtLink
             :to="tab.path"

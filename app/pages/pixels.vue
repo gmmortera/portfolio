@@ -1,6 +1,6 @@
 <template>
-  <section id="pixels" class="p-50">
-    <div class="flex flex-col gap-10 pl-25">
+  <section id="pixels" class="pt-20 px-6 pb-6 sm:pt-24 sm:px-10 sm:pb-10 md:pt-28 md:px-16 md:pb-16 lg:p-24 2xl:p-50">
+    <div class="flex flex-col gap-10 pl-0 sm:pl-6 lg:pl-25">
       <div class="anim-1 flex flex-col gap-3">
         <div class="prompt-line">
           <span class="prompt-prefix">&gt;</span>
@@ -49,7 +49,7 @@
       </div>
 
       <!-- empty state: a terminal that hasn't been drawn on yet -->
-      <div v-else class="anim-2 terminal-card max-w-2/3">
+      <div v-else class="anim-2 terminal-card w-full lg:max-w-2/3">
         <div class="terminal-card-header">
           <span>~/pixels</span>
         </div>

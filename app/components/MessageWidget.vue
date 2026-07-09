@@ -13,14 +13,11 @@
           </li>
         </ul>
       </div>
-
-      <MessageWidgetForm class="relative z-10" @message-sent="refresh" />
     </div>
 </template>
 
 <script lang="ts" setup>
-let pollMessages: ReturnType<typeof setInterval>
-const { data: guestMessages, refresh } = useFetch("/api/messages")
+const { data: guestMessages } = useFetch("/api/messages")
 
 const sortedMessages = computed(() => {
   if (!guestMessages.value || !guestMessages.value.ok)  return []
@@ -28,15 +25,5 @@ const sortedMessages = computed(() => {
   return guestMessages.value.messages
     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime())
     .slice(0, 30)
-})
-
-onMounted(() => {
-  pollMessages = setInterval(() => {
-    refresh()
-  }, 30000)
-})
-
-onUnmounted(() => {
-  clearInterval(pollMessages)
 })
 </script>

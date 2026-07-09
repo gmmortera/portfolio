@@ -1,7 +1,7 @@
 <template>
-  <section id="experience" class="p-50">
+  <section id="experience" class="pt-20 px-6 pb-6 sm:pt-24 sm:px-10 sm:pb-10 md:pt-28 md:px-16 md:pb-16 lg:p-24 2xl:p-50">
     <div class="flex flex-col gap-10">
-      <div class="anim-1 prompt-line pl-25">
+      <div class="anim-1 prompt-line pl-0 sm:pl-6 lg:pl-25">
         <span class="prompt-prefix">&gt;</span>
         <span>ls ~/experience</span>
       </div>
@@ -9,7 +9,7 @@
         <li
           v-for="(experience, index) in WORK_EXPERIENCES"
           :key="experience.company"
-          :class="`anim-${index + 2} pl-25`"
+          :class="`anim-${index + 2} pl-0 sm:pl-6 lg:pl-25`"
         >
           <p class="text-green">{{ experience.company }}</p>
           <p>

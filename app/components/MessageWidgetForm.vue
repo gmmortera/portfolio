@@ -1,6 +1,6 @@
 <template>
-  <div class="pt-50 pr-50">
-    <div class="flex gap-2 items-center">
+  <div class="pt-12 px-6 pb-12 sm:pt-16 sm:px-10 lg:pt-50 lg:pr-50 lg:pl-0 lg:pb-0">
+    <div class="flex flex-wrap gap-2 items-center">
       <h2 class="anim-1">leave a message.</h2>
       <p class="anim-2 text-xs text-green-dim">(add "@[username]" in the beginning of your message)</p>
     </div>
@@ -17,7 +17,7 @@
       />
       <div class="flex items-center justify-between">
         <p v-if="errorMessage" class="text-red-500 mb-2">{{ errorMessage }}</p>
-        <button class="hover:cursor-pointer max-w-1/4 ml-auto" type="submit">send</button>
+        <button class="hover:cursor-pointer max-w-full sm:max-w-1/4 ml-auto" type="submit">send</button>
       </div>
     </form>
   </div>

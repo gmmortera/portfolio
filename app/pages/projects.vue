@@ -1,7 +1,7 @@
 <template>
-  <section id="projects" class="flex gap-30 p-50">
+  <section id="projects" class="flex flex-col lg:flex-row gap-10 lg:gap-30 pt-20 px-6 pb-6 sm:pt-24 sm:px-10 sm:pb-10 md:pt-28 md:px-16 md:pb-16 lg:p-24 2xl:p-50">
     <div class="flex flex-col gap-10">
-      <div class="anim-1 prompt-line pl-25">
+      <div class="anim-1 prompt-line pl-0 sm:pl-6 lg:pl-25">
         <span class="prompt-prefix">&gt;</span>
         <span>ls ~/projects</span>
       </div>
@@ -9,8 +9,9 @@
         <li
           v-for="(project, index) in PROJECTS"
           :key="project.id"
-          :class="`anim-${Math.min(index + 2, 6)} pl-25`"
+          :class="`anim-${Math.min(index + 2, 6)} pl-0 sm:pl-6 lg:pl-25 cursor-pointer`"
           @mouseenter="currentProject = project as Project"
+          @click="currentProject = project as Project"
         >
           <p>
             <span class="text-green">{{ project.name }}</span>
@@ -21,7 +22,7 @@
     </div>
     <div
       v-if="currentProject"
-      class="flex flex-col gap-6 max-w-1/3"
+      class="flex flex-col gap-6 w-full lg:max-w-1/3"
     >
       <div class="prompt-line">
         <span class="prompt-prefix">&gt;</span>
