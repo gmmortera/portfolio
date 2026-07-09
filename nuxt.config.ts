@@ -1,29 +1,19 @@
 import tailwindcss from "@tailwindcss/vite"
 
+const SITE_URL = "https://www.gmmortera.com"
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
+  site: {
+    url: SITE_URL,
+    name: "Gianfranco Mortera | Full-stack Engineer",
+  },
+
   app: {
     head: {
-      title: "Home - Gianfranco Mortera | Fullstack Engineer",
-      meta: [
-        { name: "description", content: "Gianfranco Mortera — frontend engineer by day, pixel artist by night. Building for the web from Cebu, PH, and currently learning game dev." },
-        { property: "og:title", content: "Home - Gianfranco Mortera | Fullstack Engineer" },
-        { property: "og:type", content: "website" },
-        { property: "og:url", content: "https://www.gmmortera.com/" },
-        { property: "og:image", content: "https://www.gmmortera.com/comicsilo-preview.png" },
-        { property: "og:image:alt", content: "Home - Gianfranco Mortera | Fullstack Engineer" },
-        { property: "og:description", content: "Frontend engineer by day, pixel artist by night. Building for the web from Cebu, PH." },
-        { property: "og:site_name", content: "Home - Gianfranco Mortera | Fullstack Engineer" },
-
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: "Home - Gianfranco Mortera | Fullstack Engineer" },
-        { name: "twitter:description", content: "Frontend engineer by day, pixel artist by night. Building for the web from Cebu, PH." },
-        { name: "twitter:image", content: "" },
-      ],
       link: [
-        { rel: "canonical", href: "https://www.gmmortera.com/" },
         { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
         { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
         { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
@@ -31,11 +21,12 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/x-icon", href: "/favicon-dark.svg", media: "(prefers-color-scheme: dark)" },
 
         { rel: "manifest", href: "/site.webmanifest" }
-      ],
-      script: [
-
       ]
     }
+  },
+
+  robots: {
+    sitemap: `${SITE_URL}/sitemap.xml`,
   },
 
   css: [
@@ -59,7 +50,8 @@ export default defineNuxtConfig({
     "@nuxt/icon",
     "@nuxt/fonts",
     "@nuxt/image",
-    "@vueuse/nuxt"
+    "@vueuse/nuxt",
+    "@nuxtjs/robots"
   ],
 
   router: {

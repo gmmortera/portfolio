@@ -9,4 +9,10 @@
 
 <script setup lang="ts">
 useSiteStructuredData()
+
+useSeoMeta({
+  ogType: "website",
+  ogSiteName: "Gianfranco Mortera",
+  twitterCard: "summary_large_image",
+})
 </script>

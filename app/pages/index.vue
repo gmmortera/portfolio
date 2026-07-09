@@ -40,3 +40,9 @@
     <MessageWidget />
   </section>
 </template>
+
+<script lang="ts" setup>
+import { TABS } from '~/constants'
+
+usePageStructuredData(TABS.home.stucturedData)
+</script>

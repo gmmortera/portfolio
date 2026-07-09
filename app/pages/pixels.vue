@@ -68,7 +68,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ART_PIECES, ART_CATEGORIES } from '~/constants'
+import { ART_PIECES, ART_CATEGORIES, TABS } from '~/constants'
 
 const groupedArt = ART_CATEGORIES.map(({ key, label }, index) => ({
   key,
@@ -76,6 +76,8 @@ const groupedArt = ART_CATEGORIES.map(({ key, label }, index) => ({
   animIndex: Math.min(index + 2, 10),
   pieces: ART_PIECES.filter((piece) => piece.category === key),
 })).filter((group) => group.pieces.length)
+
+usePageStructuredData(TABS.pixels.stucturedData)
 </script>
 
 <style scoped>

@@ -30,5 +30,7 @@
 </template>
 
 <script lang="ts" setup>
-import { WORK_EXPERIENCES } from '~/constants';
+import { WORK_EXPERIENCES, TABS } from '~/constants';
+
+usePageStructuredData(TABS.about.stucturedData)
 </script>

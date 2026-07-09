@@ -8,7 +8,6 @@
         v-if="currentTab !== TABS.home"
         :to="TABS.home.path"
         class="hover:text-green hover:cursor-pointer mr-auto"
-        @click="currentTab = TABS.home"
       >
         ..
       </NuxtLink>
@@ -17,7 +16,6 @@
           <NuxtLink
             :to="tab.path"
             active-class="text-green"
-            @click="currentTab = tab"
           >
             {{ tab.title }}
           </NuxtLink>
@@ -33,7 +31,10 @@
 <script setup lang="ts">
 import { TABS } from "~/constants"
 
-const currentTab = shallowRef(TABS.home)
+const route = useRoute()
+const currentTab = computed(() => {
+  return Object.values(TABS).find((tab) => tab.path === route.path) ?? TABS.home
+})
 
 usePageStructuredData({ ...currentTab.value.stucturedData })
 

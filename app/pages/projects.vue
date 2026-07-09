@@ -89,7 +89,9 @@
 </template>
 
 <script lang="ts" setup>
-import { PROJECTS, type Project } from '~/constants';
+import { PROJECTS, TABS, type Project } from '~/constants';
 
 const currentProject = ref<Project | null>(PROJECTS[0] as Project)
+
+usePageStructuredData(TABS.projects.stucturedData)
 </script>

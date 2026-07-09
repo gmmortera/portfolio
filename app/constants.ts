@@ -4,38 +4,38 @@ export const TABS = {
     path: '/',
     stucturedData: {
       type: 'HomePage',
-      id: 'https://gmmortera.com/#home',
-      url: 'https://gmmortera.com/',
+      id: 'https://www.gmmortera.com/#home',
+      url: 'https://www.gmmortera.com/',
       name: 'Gianfranco Mortera | Full-stack Engineer',
-      description: 'Full-stack developer crafting clean, interactive, and meaningful digital experiences from Cebu, PH.',
-      isPartOf: 'https://gmmortera.com/#website',
-      publisher: 'https://gmmortera.com/#person'
+      description: 'Gianfranco Mortera — frontend engineer by day, pixel artist by night. Building for the web from Cebu, PH, and currently learning game dev.',
+      isPartOf: 'https://www.gmmortera.com/#website',
+      publisher: 'https://www.gmmortera.com/#person'
     }
   },
   about: {
     title: '~/experience',
     path: '/experience',
     stucturedData: {
-      type: 'ExperiencePage',
-      id: 'https://gmmortera.com/#experience',
-      url: 'https://gmmortera.com/experience',
+      type: 'ProfilePage',
+      id: 'https://www.gmmortera.com/#experience',
+      url: 'https://www.gmmortera.com/experience',
       name: 'Experience - Gianfranco Mortera | Full-stack Engineer',
-      description: 'Full-stack developer crafting clean, interactive, and meaningful digital experiences from Cebu, PH.',
-      isPartOf: 'https://gmmortera.com/#website',
-      publisher: 'https://gmmortera.com/#person'
+      description: 'Work history and achievements — Gianfranco Mortera, full-stack developer crafting clean, interactive, and meaningful digital experiences from Cebu, PH.',
+      isPartOf: 'https://www.gmmortera.com/#website',
+      publisher: 'https://www.gmmortera.com/#person'
     }
   },
   projects: {
     title: '~/projects',
     path: '/projects',
     stucturedData: {
-      type: 'ProjectPage',
-      id: 'https://gmmortera.com/#projects',
-      url: 'https://gmmortera.com/projects',
+      type: 'CollectionPage',
+      id: 'https://www.gmmortera.com/#projects',
+      url: 'https://www.gmmortera.com/projects',
       name: 'Projects - Gianfranco Mortera | Full-stack Engineer',
-      description: 'Full-stack developer crafting clean, interactive, and meaningful digital experiences from Cebu, PH.',
-      isPartOf: 'https://gmmortera.com/#website',
-      publisher: 'https://gmmortera.com/#person'
+      description: 'Client and personal projects by Gianfranco Mortera — full-stack developer crafting clean, interactive, and meaningful digital experiences from Cebu, PH.',
+      isPartOf: 'https://www.gmmortera.com/#website',
+      publisher: 'https://www.gmmortera.com/#person'
     }
   },
   pixels: {
@@ -43,12 +43,12 @@ export const TABS = {
     path: '/pixels',
     stucturedData: {
       type: 'CollectionPage',
-      id: 'https://gmmortera.com/#pixels',
-      url: 'https://gmmortera.com/pixels',
+      id: 'https://www.gmmortera.com/#pixels',
+      url: 'https://www.gmmortera.com/pixels',
       name: 'Pixel Art - Gianfranco Mortera | Full-stack Engineer',
       description: 'The night shift — sprites, tiles, and tiny worlds by Gianfranco Mortera.',
-      isPartOf: 'https://gmmortera.com/#website',
-      publisher: 'https://gmmortera.com/#person'
+      isPartOf: 'https://www.gmmortera.com/#website',
+      publisher: 'https://www.gmmortera.com/#person'
     }
   },
 }

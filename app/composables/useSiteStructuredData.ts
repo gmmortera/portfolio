@@ -10,18 +10,21 @@ export const useSiteStructuredData = () => {
               '@type': 'WebSite',
               '@id': 'https://www.gmmortera.com/#website',
               'url': 'https://www.gmmortera.com/',
-              'name': 'Home - Gianfranco Mortera | Fullstack Engineer',
-              'description': 'Create a portfolio description here.',
+              'name': 'Gianfranco Mortera | Full-stack Engineer',
+              'description': 'Gianfranco Mortera — frontend engineer by day, pixel artist by night. Building for the web from Cebu, PH, and currently learning game dev.',
+              'publisher': { '@id': 'https://www.gmmortera.com/#person' }
             },
             {
-              '@type': 'Organization',
-              '@id': 'https://www.gmmortera.com/#organization',
+              '@type': 'Person',
+              '@id': 'https://www.gmmortera.com/#person',
               'name': 'Gianfranco Mortera',
               'url': 'https://www.gmmortera.com/',
-              'logo': {
-                '@type': 'ImageObject',
-                'url': 'https://www.gmmortera.com/android-chrome-512x512.png'
-              }
+              'jobTitle': 'Frontend Engineer',
+              'image': 'https://www.gmmortera.com/og-image.png',
+              'sameAs': [
+                'https://github.com/gmmortera',
+                'https://www.linkedin.com/in/gianfranco-mortera-93a494282'
+              ]
             }
           ]
         })

@@ -1,7 +1,7 @@
 {
   "name": "Gianfranco Mortera — Portfolio",
   "short_name": "Gianfranco Mortera — Portfolio",
-  "description": "Create a portfolio description here.",
+  "description": "Portfolio of Gianfranco Mortera — frontend engineer by day, pixel artist by night, building for the web from Cebu, PH.",
   "icons": [
     { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
