@@ -1,12 +1,16 @@
 <template>
   <section id="projects" class="flex gap-30 p-50">
-    <div>
+    <div class="flex flex-col gap-10">
+      <div class="anim-1 prompt-line pl-25">
+        <span class="prompt-prefix">&gt;</span>
+        <span>ls ~/projects</span>
+      </div>
       <ul class="flex flex-col gap-10">
         <li
           v-for="(project, index) in PROJECTS"
           :key="project.id"
-          :class="`anim-${index + 1} pl-25`"
-          @mouseenter="currentProject = project"
+          :class="`anim-${Math.min(index + 2, 6)} pl-25`"
+          @mouseenter="currentProject = project as Project"
         >
           <p>
             <span class="text-green">{{ project.name }}</span>
@@ -17,14 +21,69 @@
     </div>
     <div
       v-if="currentProject"
-      class="flex flex-col gap-10 max-w-1/3"
+      class="flex flex-col gap-6 max-w-1/3"
     >
-      <p>{{ currentProject.description }}</p>
-      <NuxtImg
-        :src="currentProject.image"
-        :alt="currentProject.name"
-        width="600"
-      />
+      <div class="prompt-line">
+        <span class="prompt-prefix">&gt;</span>
+        <span>cat ~/{{ currentProject.id }}/README.md</span>
+      </div>
+
+      <p class="text-body">{{ currentProject.description }}</p>
+
+      <div class="flex flex-wrap gap-2">
+        <span
+          v-for="tech in currentProject.technologies"
+          :key="tech"
+          class="tag-pill"
+        >
+          {{ tech }}
+        </span>
+      </div>
+
+      <p class="text-label">
+        <span>status:</span>
+        <span :class="currentProject.status === 'in_development' ? 'text-green' : ''">
+          {{ currentProject.status === 'in_development' ? ' in_development' : ' deployed' }}
+        </span>
+        <span v-if="currentProject.kind === 'client'" class="text-green"> · client_work</span>
+      </p>
+
+      <div class="flex gap-3" v-if="currentProject.github || currentProject.live">
+        <NuxtLink
+          v-if="currentProject.github"
+          :to="currentProject.github"
+          target="_blank"
+          external
+          class="contact-link"
+        >
+          [github]
+        </NuxtLink>
+        <NuxtLink
+          v-if="currentProject.live"
+          :to="currentProject.live"
+          target="_blank"
+          external
+          class="contact-link"
+        >
+          [live]
+        </NuxtLink>
+      </div>
+
+      <div class="terminal-card w-full max-w-150">
+        <div class="terminal-card-header">
+          <span>{{ currentProject.image ? currentProject.image.split('/').pop() : 'no_preview.png' }}</span>
+        </div>
+        <div class="terminal-card-body flex items-center justify-center aspect-video">
+          <NuxtImg
+            v-if="currentProject.image"
+            :src="currentProject.image"
+            :alt="currentProject.name"
+            width="600"
+            class="max-w-full max-h-full"
+          />
+          <p v-else class="text-body-muted text-label">[ no preview available ]</p>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -32,5 +91,5 @@
 <script lang="ts" setup>
 import { PROJECTS, type Project } from '~/constants';
 
-const currentProject = ref<Project | null>(null)
+const currentProject = ref<Project | null>(PROJECTS[0] as Project)
 </script>

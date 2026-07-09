@@ -8,18 +8,18 @@ export default defineNuxtConfig({
     head: {
       title: "Home - Gianfranco Mortera | Fullstack Engineer",
       meta: [
-        { name: "description", content: "Create a portfolio description here." },
+        { name: "description", content: "Gianfranco Mortera — frontend engineer by day, pixel artist by night. Building for the web from Cebu, PH, and currently learning game dev." },
         { property: "og:title", content: "Home - Gianfranco Mortera | Fullstack Engineer" },
         { property: "og:type", content: "website" },
         { property: "og:url", content: "https://www.gmmortera.com/" },
         { property: "og:image", content: "https://www.gmmortera.com/comicsilo-preview.png" },
         { property: "og:image:alt", content: "Home - Gianfranco Mortera | Fullstack Engineer" },
-        { property: "og:description", content: "Create a portfolio description here." },
+        { property: "og:description", content: "Frontend engineer by day, pixel artist by night. Building for the web from Cebu, PH." },
         { property: "og:site_name", content: "Home - Gianfranco Mortera | Fullstack Engineer" },
 
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: "Home - Gianfranco Mortera | Fullstack Engineer" },
-        { name: "twitter:description", content: "Create a portfolio description here." },
+        { name: "twitter:description", content: "Frontend engineer by day, pixel artist by night. Building for the web from Cebu, PH." },
         { name: "twitter:image", content: "" },
       ],
       link: [
@@ -51,11 +51,7 @@ export default defineNuxtConfig({
   },
 
   image: {
-    domains: [process.env.NUXT_PUBLIC_STRAPI_URL?.replace(/^https?:\/\//, "") || ""],
-    remotePatterns: [{
-      protocol: "https",
-      hostname: process.env.NUXT_PUBLIC_STRAPI_URL?.replace(/^https?:\/\//, "") || ""
-    }]
+    domains: [process.env.NUXT_PUBLIC_STRAPI_URL?.replace(/^https?:\/\//, "") || ""]
   },
 
   modules: [

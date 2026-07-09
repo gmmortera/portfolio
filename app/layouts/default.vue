@@ -1,5 +1,8 @@
 <template>
-  <header class="fixed top-0 left-0 right-0 z-50">
+  <header
+    class="fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-out"
+    :class="hideHeader ? '-translate-y-full' : 'translate-y-0'"
+  >
     <nav class="flex items-center justify-end p-6">
       <NuxtLink
         v-if="currentTab !== TABS.home"
@@ -33,4 +36,22 @@ import { TABS } from "~/constants"
 const currentTab = shallowRef(TABS.home)
 
 usePageStructuredData({ ...currentTab.value.stucturedData })
+
+const hideHeader = shallowRef(false)
+let lastScrollY = 0
+
+function handleScroll() {
+  const currentScrollY = window.scrollY
+  hideHeader.value = currentScrollY > lastScrollY && currentScrollY > 80
+  lastScrollY = currentScrollY
+}
+
+onMounted(() => {
+  lastScrollY = window.scrollY
+  window.addEventListener("scroll", handleScroll, { passive: true })
+})
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll)
+})
 </script>
