@@ -38,19 +38,19 @@ export const TABS = {
       publisher: 'https://www.gmmortera.com/#person'
     }
   },
-  pixels: {
-    title: '~/pixels',
-    path: '/pixels',
-    stucturedData: {
-      type: 'CollectionPage',
-      id: 'https://www.gmmortera.com/#pixels',
-      url: 'https://www.gmmortera.com/pixels',
-      name: 'Pixel Art - Gianfranco Mortera | Full-stack Engineer',
-      description: 'The night shift — sprites, tiles, and tiny worlds by Gianfranco Mortera.',
-      isPartOf: 'https://www.gmmortera.com/#website',
-      publisher: 'https://www.gmmortera.com/#person'
-    }
-  },
+  // pixels: {
+  //   title: '~/pixels',
+  //   path: '/pixels',
+  //   stucturedData: {
+  //     type: 'CollectionPage',
+  //     id: 'https://www.gmmortera.com/#pixels',
+  //     url: 'https://www.gmmortera.com/pixels',
+  //     name: 'Pixel Art - Gianfranco Mortera | Full-stack Engineer',
+  //     description: 'The night shift — sprites, tiles, and tiny worlds by Gianfranco Mortera.',
+  //     isPartOf: 'https://www.gmmortera.com/#website',
+  //     publisher: 'https://www.gmmortera.com/#person'
+  //   }
+  // },
 }
 
 export const WORK_EXPERIENCES = [

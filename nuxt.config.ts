@@ -14,6 +14,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [
+        { href: 'https://actionnetwork.org/css/style-embed-v3.css', rel: 'stylesheet', type: 'text/css' },
         { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
         { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
         { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
@@ -21,6 +22,9 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/x-icon", href: "/favicon-dark.svg", media: "(prefers-color-scheme: dark)" },
 
         { rel: "manifest", href: "/site.webmanifest" }
+      ],
+      script: [
+        { src: 'https://actionnetwork.org/widgets/v6/petition/reject-pax-silica-and-us-israeli-expansion-in-the-philippines?format=js&source=widget' }
       ]
     }
   },

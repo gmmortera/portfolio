@@ -1,5 +1,6 @@
 <template>
   <section id="home" class="grid grid-cols-1 lg:grid-cols-2 relative">
+    <!-- <div id='can-petition-area-reject-pax-silica-and-us-israeli-expansion-in-the-philippines' style='width: 100%; height: 25%;'></div> -->
     <div class="pt-24 px-6 pb-12 sm:pt-28 sm:px-10 lg:pt-50 lg:pl-50 lg:pr-16 lg:pb-0 flex flex-col gap-5">
       <p class="anim-1 text-eyebrow">available for collaboration</p>
       <h1 class="anim-2">I <span class="text-green">build</span> things<br>for the web.</h1>
