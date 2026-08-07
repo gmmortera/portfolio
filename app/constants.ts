@@ -94,13 +94,8 @@ export interface Project {
   id: string
   name: string
   image?: string
-  overview: string
   description: string
-  technologies: string[]
-  status?: 'deployed' | 'in_development'
-  kind?: 'personal' | 'client'
-  github?: string
-  live?: string
+  link?: string
 }
 
 export type ArtCategory = 'other' | 'character-design' | 'in-game'
@@ -120,95 +115,40 @@ export const ART_CATEGORIES: { key: ArtCategory, label: string }[] = [
   { key: 'other', label: 'other' },
 ]
 
-export const ART_PIECES: ArtPiece[] = [
-  { id: 'me', title: 'me', file: '/pixel-art/me.png', size: '256x256', year: '2022', category: 'other' },
-  { id: 'please-dont-get-grabbed', title: 'please dont get grabbed', file: '/pixel-art/please-dont-get-grabbed.png', size: '288x258', year: '2022', category: 'other' },
-  { id: 'jarnbjorn', title: 'jarnbjorn', file: '/pixel-art/jarnbjorn.png', size: '256x256', year: '2022', category: 'other' },
-  { id: 'kirby', title: 'kirby', file: '/pixel-art/kirby.png', size: '256x256', year: '2022', category: 'other' },
-  { id: 'brick', title: 'brick', file: '/pixel-art/brick.png', size: '256x256', year: '2022', category: 'other' },
-  { id: 'flight', title: 'flight', file: '/pixel-art/flight.png', size: '256x256', year: '2022', category: 'other' },
-  { id: 'demon', title: 'demon', file: '/pixel-art/demon.png', size: '256x384', year: '2022', category: 'other' },
-  { id: 'selection', title: 'selection', file: '/pixel-art/selection.png', size: '256x256', year: '2022', category: 'other' },
-  { id: 'agile', title: 'agile', file: '/pixel-art/agile.png', size: '300x256', year: '2022', category: 'other' },
-  { id: 'lies', title: 'lies', file: '/pixel-art/lies.png', size: '300x264', year: '2022', category: 'other' },
-  { id: 'tooth', title: 'tooth', file: '/pixel-art/tooth.png', size: '384x288', year: '2022', category: 'other' },
-  { id: 'dragon', title: 'dragon', file: '/pixel-art/dragon.png', size: '384x288', year: '2022', category: 'other' },
-  { id: 'energy', title: 'energy', file: '/pixel-art/energy.png', size: '384x288', year: '2022', category: 'other' },
-  { id: 'demi', title: 'demi', file: '/pixel-art/demi.png', size: '320x360', year: '2023', category: 'other' },
-  { id: 'the-guardian-from-the-broken-blade', title: 'the guardian from the broken blade', file: '/pixel-art/the-guardian-from-the-broken-blade.png', size: '370x380', year: '2023', category: 'other' },
-  { id: 'character-concept-5', title: 'character concept 5', file: '/pixel-art/character-concept-5.png', size: '772x584', year: '2023', category: 'character-design' },
-  { id: 'character-concept-6', title: 'character concept 6', file: '/pixel-art/character-concept-6.png', size: '564x576', year: '2023', category: 'character-design' },
-  { id: 'halogi-of-the-verdant-inferno', title: 'halogi of the verdant inferno', file: '/pixel-art/halogi-of-the-verdant-inferno.png', size: '810x960', year: '2023', category: 'character-design' },
-  { id: 'shadow', title: 'shadow', file: '/pixel-art/shadow.png', size: '256x256', year: '2022', category: 'character-design' },
-  { id: 'character-concept-1', title: 'character concept 1', file: '/pixel-art/character-concept-1.png', size: '380x270', year: '2022', category: 'character-design' },
-  { id: 'character-concept-2', title: 'character concept 2', file: '/pixel-art/character-concept-2.png', size: '380x270', year: '2022', category: 'character-design' },
-  { id: 'character-concept-3', title: 'character concept 3', file: '/pixel-art/character-concept-3.png', size: '380x270', year: '2022', category: 'character-design' },
-  { id: 'warlock', title: 'warlock', file: '/pixel-art/warlock.png', size: '288x240', year: '2023', category: 'character-design' },
-  { id: 'magdalena', title: 'magdalena', file: '/pixel-art/magdalena.png', size: '256x256', year: '2022', category: 'character-design' },
-  { id: 'character-concept-4', title: 'character concept 4', file: '/pixel-art/character-concept-4.png', size: '480x320', year: '2023', category: 'character-design' },
-  { id: 'in-game-concept-1', title: 'in-game concept 1', file: '/pixel-art/in-game-concept-1.png', size: '600x416', year: '2023', category: 'in-game' },
-  { id: 'in-game-concept-2', title: 'in-game concept 2', file: '/pixel-art/in-game-concept-2.png', size: '960x800', year: '2023', category: 'in-game' },
-]
-
-export const PROJECTS = [
+export const PROJECTS: Project[] = [
   {
     id: "comprehensive-time-manager",
     name: "ClockMe",
     image: "/dev-projects/clockme.png",
-    overview: 'AI-powered analytics and live dashboards for smarter time management, shipped for a startup.',
     description: "A sophisticated time management application featuring AI-powered analytics and real-time dashboards. Developed for a startup company with direct collaboration with Japan-based stakeholders.",
-    technologies: ["Nuxt 3", "TypeScript", "Tailwind CSS", "OpenAI API"],
-    status: 'deployed',
-    kind: 'client',
+    link: 'https://clock.me/',
   },
   {
     id: 'comic-silo',
     name: 'Comic Silo',
     image: '/dev-projects/comic-silo.png',
-    overview: 'Search once to compare prices, stock, and release dates for comics across Philippine stores.',
     description: 'A price comparison and catalog aggregator for comic books and graphic novels sold in the Philippines. Instead of visiting every comic retailer separately, search once on Comic Verse and compare prices, availability, and release dates then click through to buy directly from the store.',
-    technologies: ['Nuxt 3', 'TypeScript', 'Tailwind CSS'],
-    status: 'deployed',
-    kind: 'personal',
-  },
-  {
-    id: 'social-media-server',
-    name: 'Chummy',
-    overview: 'A responsive social space where every post, comment, and like lands in real time.',
-    description: 'A dynamic platform enabling users to create posts, comment, and like content in real-time. Chummy fosters instant connections and engagement. This application aims to create a vibrant, responsive community where every interaction feels immediate and impactful.',
-    technologies: ['Scala', 'Play Framework', 'Akka'],
-    status: 'deployed',
-    kind: 'personal',
-    github: 'https://github.com/gmmortera/chummy-backend'
+    link: 'https://www.comicsilo.com/',
   },
   {
     id: 'website-performance-checker',
     name: 'GovCheck',
     image: '/dev-projects/govcheck-ph.png',
-    overview: 'Monitors Philippine .gov.ph sites for downtime and slowness for citizens to check and agencies to answer for.',
     description: 'A civic tech web app that monitors the speed, uptime, and usability of Philippine government websites (.gov.ph domains). It serves two audiences: Filipino citizens quickly check if a gov site is down or slow before wasting time Government accountability public leaderboard and incident history to pressure agencies to improve',
-    technologies: ['Nuxt 3', 'TypeScript', 'Tailwind CSS'],
-    status: 'deployed',
-    kind: 'personal',
-    github: 'https://github.com/gmmortera/govcheck-ph'
-  },
-  {
-    id: 'brook',
-    name: 'Brook',
-    overview: "A simplified distributed message broker implementing Kafka's core architecture from scratch in Scala and Akka.",
-    description: 'A simplified message broker built in Scala, inspired by the core architecture of Apache Kafka. It implements the fundamental concepts of a distributed messaging system append-only partition logs, a binary TCP protocol, and concurrent producer and consumer clients from scratch using the JVM standard library and Akka.',
-    technologies: ['Scala', 'Akka', 'TCP'],
-    status: 'in_development',
-    kind: 'personal',
+    link: 'https://govcheck-ph.vercel.app/',
   },
   {
     id: 'layer-lab-cebu',
     name: 'Layer Lab Cebu',
     image: '/dev-projects/layer-lab-cebu.png',
-    overview: 'Client work — a 3D printing studio site in Cebu, designed and shipped end to end.',
     description: 'A production website for a Cebu-based 3D printing studio, designed, built, and deployed end to end as freelance client work. Nuxt on the frontend, Tailwind for the design system, deployed on Vercel.',
-    technologies: ['Nuxt', 'Tailwind CSS', 'Vercel'],
-    status: 'deployed',
-    kind: 'client',
+    link: 'https://layerlabcebu.com/',
+  },
+  {
+    id: 'karakoa-solutions',
+    name: 'Karakoa Solutions',
+    image: '/dev-projects/karakoa-solutions.png',
+    description: 'A Philippine-based team providing recurring IT, virtual assistant (VA), and executive assistant (EA) services. The team is coordinated by a single lead to minimize handoffs and streamline project management.',
+    link: 'https://www.karakoa-solutions.com/',
   }
 ]
