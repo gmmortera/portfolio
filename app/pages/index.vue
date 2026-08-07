@@ -39,16 +39,16 @@
       </div>
     </div>
     <div class="hidden lg:grid place-items-center anim-5">
-      <div class="logo-mark gap-5" aria-hidden="true">
-        <span class="logo-mark-cell" />
-        <span class="logo-mark-cell" />
-        <span class="logo-mark-cell logo-mark-cell-cut" />
-        <span class="logo-mark-cell" />
+      <div ref="logoMarkRef" class="logo-mark gap-5" aria-hidden="true">
+        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
+        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
+        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><svg class="logo-mark-cell-cut" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="logo-mark-cell-cut-fill" points="0,0 100,0 0,100" /></svg></span></span>
+        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
         <span />
-        <span class="logo-mark-cell" />
-        <span class="logo-mark-cell" />
-        <span class="logo-mark-cell" />
-        <span class="logo-mark-cell" />
+        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
+        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
+        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
+        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
       </div>
     </div>
   </section>
@@ -58,4 +58,70 @@
 import { TABS } from '~/constants'
 
 usePageStructuredData(TABS.home.stucturedData)
+
+const logoMarkRef = ref<HTMLElement | null>(null)
+
+const PUSH_RADIUS = 130
+const PUSH_STRENGTH = 34
+const PUSH_EASE = 0.08
+
+let pushEls: HTMLElement[] = []
+let pushState: { x: number, y: number }[] = []
+let pointerX = -Infinity
+let pointerY = -Infinity
+let rafId = 0
+
+function onPointerMove(e: PointerEvent) {
+  pointerX = e.clientX
+  pointerY = e.clientY
+}
+
+function onPointerGone() {
+  pointerX = -Infinity
+  pointerY = -Infinity
+}
+
+function tick() {
+  for (let i = 0; i < pushEls.length; i++) {
+    const el = pushEls[i]
+    const rect = el.getBoundingClientRect()
+    const cx = rect.left + rect.width / 2
+    const cy = rect.top + rect.height / 2
+    const dx = cx - pointerX
+    const dy = cy - pointerY
+    const dist = Math.hypot(dx, dy)
+
+    let targetX = 0
+    let targetY = 0
+    if (dist < PUSH_RADIUS && dist > 0.01) {
+      const force = (1 - dist / PUSH_RADIUS) * PUSH_STRENGTH
+      targetX = (dx / dist) * force
+      targetY = (dy / dist) * force
+    }
+
+    const state = pushState[i]
+    state.x += (targetX - state.x) * PUSH_EASE
+    state.y += (targetY - state.y) * PUSH_EASE
+    el.style.transform = `translate(${state.x.toFixed(2)}px, ${state.y.toFixed(2)}px)`
+  }
+  rafId = requestAnimationFrame(tick)
+}
+
+onMounted(() => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  if (!logoMarkRef.value) return
+
+  pushEls = Array.from(logoMarkRef.value.querySelectorAll<HTMLElement>('.logo-mark-cell-push'))
+  pushState = pushEls.map(() => ({ x: 0, y: 0 }))
+
+  window.addEventListener('pointermove', onPointerMove, { passive: true })
+  window.addEventListener('pointerleave', onPointerGone)
+  rafId = requestAnimationFrame(tick)
+})
+
+onUnmounted(() => {
+  cancelAnimationFrame(rafId)
+  window.removeEventListener('pointermove', onPointerMove)
+  window.removeEventListener('pointerleave', onPointerGone)
+})
 </script>

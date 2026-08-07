@@ -163,8 +163,21 @@
   }
 
   @keyframes markGlowPulse {
-    0%, 100% { box-shadow: 0 0 24px var(--color-green-glow); }
-    50%      { box-shadow: 0 0 36px var(--color-green-glow), 0 0 60px var(--color-green-glow-mid); }
+    0%, 100% { box-shadow: 0 0 10px var(--color-green), 0 0 28px var(--color-green-glow); }
+    50%      { box-shadow: 0 0 18px var(--color-green), 0 0 44px var(--color-green-glow), 0 0 70px var(--color-green-glow-mid); }
+  }
+
+  @keyframes markGlowPulseCut {
+    0%, 100% { filter: drop-shadow(0 0 10px var(--color-green)) drop-shadow(0 0 28px var(--color-green-glow)); }
+    50%      { filter: drop-shadow(0 0 18px var(--color-green)) drop-shadow(0 0 44px var(--color-green-glow)) drop-shadow(0 0 70px var(--color-green-glow-mid)); }
+  }
+
+  @keyframes driftSpace {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    25%  { transform: translate(10px, -12px) rotate(0.6deg); }
+    50%  { transform: translate(-8px, 8px) rotate(-0.6deg); }
+    75%  { transform: translate(-12px, -6px) rotate(0.4deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -336,20 +349,58 @@
 }
 
 /*
+ * logo-mark-cell-float
+ * → <span> — grid item; drifts independently in space (CSS keyframe, per-cell timing)
+ */
+@utility logo-mark-cell-float {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+ * logo-mark-cell-push
+ * → <span> — nested inside -float; JS sets its transform to nudge the cell away from the cursor
+ *   Kept as a separate layer so the JS-driven transform never fights the CSS drift animation.
+ */
+@utility logo-mark-cell-push {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/*
  * logo-mark-cell
  * → <span> — filled square in .logo-mark
  */
 @utility logo-mark-cell {
+  display: block;
+  width: 100%;
+  height: 100%;
   background: var(--color-white);
-  box-shadow: 0 0 24px var(--color-green-glow);
+  box-shadow: 0 0 10px var(--color-green), 0 0 28px var(--color-green-glow);
 }
 
 /*
  * logo-mark-cell-cut
- * → modifier — diagonally cuts a .logo-mark-cell into a triangle
+ * → <svg> — diagonally-cut triangle variant of .logo-mark-cell
+ *   clip-path clips filter/box-shadow output along with the shape (nothing
+ *   would render past the cut edge), so the triangle is drawn as SVG geometry
+ *   instead — that lets filter: drop-shadow glow follow its silhouette freely.
  */
 @utility logo-mark-cell-cut {
-  clip-path: polygon(0 0, 100% 0, 0 100%);
+  display: block;
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 10px var(--color-green)) drop-shadow(0 0 28px var(--color-green-glow));
+}
+
+/*
+ * logo-mark-cell-cut-fill
+ * → <polygon> — fill color for the .logo-mark-cell-cut triangle
+ */
+@utility logo-mark-cell-cut-fill {
+  fill: var(--color-white);
 }
 
 
@@ -938,6 +989,27 @@
     animation: markGlowPulse 3s ease-in-out infinite;
   }
 
+  .logo-mark-cell-cut {
+    animation: markGlowPulseCut 3s ease-in-out infinite;
+  }
+
+  /*
+   * ── Logomark zero-gravity drift ──
+   * each cell drifts on its own cycle (staggered duration/delay/direction)
+   * so the mark reads as loose debris rather than one rigid shape
+   */
+  .logo-mark-cell-float {
+    animation: driftSpace 9s ease-in-out infinite;
+  }
+  .logo-mark-cell-float:nth-child(1) { animation-duration: 8s;    animation-delay: -1s; }
+  .logo-mark-cell-float:nth-child(2) { animation-duration: 10.5s; animation-delay: -3s;   animation-direction: reverse; }
+  .logo-mark-cell-float:nth-child(3) { animation-duration: 7.5s;  animation-delay: -5s; }
+  .logo-mark-cell-float:nth-child(4) { animation-duration: 11s;   animation-delay: -2s;   animation-direction: reverse; }
+  .logo-mark-cell-float:nth-child(6) { animation-duration: 9.5s;  animation-delay: -4.5s; }
+  .logo-mark-cell-float:nth-child(7) { animation-duration: 12s;   animation-delay: -6s;   animation-direction: reverse; }
+  .logo-mark-cell-float:nth-child(8) { animation-duration: 8.5s;  animation-delay: -2.5s; }
+  .logo-mark-cell-float:nth-child(9) { animation-duration: 10s;   animation-delay: -1.5s; animation-direction: reverse; }
+
   /* ── CRT scanlines scrolling animation (optional intensity upgrade) ── */
   .crt-scanlines-animated {
     animation: scanlineScroll 0.1s steps(1) infinite;
@@ -1139,6 +1211,8 @@
     .cursor::after { animation: none; opacity: 1; }
     .glow          { animation: none; }
     .logo-mark-cell { animation: none; }
+    .logo-mark-cell-cut { animation: none; }
+    .logo-mark-cell-float { animation: none; }
     .status-dot    { animation: none; }
     .crt-flicker   { animation: none; }
     .scroll-hint-arrow { animation: none; }
