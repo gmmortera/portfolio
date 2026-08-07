@@ -13,6 +13,9 @@ export default defineNuxtConfig({
 
   app: {
     head: {
+      htmlAttrs: {
+        lang: "en",
+      },
       link: [
         { href: 'https://actionnetwork.org/css/style-embed-v3.css', rel: 'stylesheet', type: 'text/css' },
         { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },

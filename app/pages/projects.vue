@@ -1,10 +1,10 @@
 <template>
   <section id="projects" class="pt-20 px-6 pb-6 sm:pt-24 sm:px-10 sm:pb-10 md:pt-28 md:px-16 md:pb-16 lg:p-24 2xl:p-50">
     <div class="flex flex-col gap-10">
-      <div class="anim-1 prompt-line pl-0 sm:pl-6 lg:pl-25">
-        <span class="prompt-prefix">&gt;</span>
+      <h1 class="anim-1 prompt-line pl-0 sm:pl-6 lg:pl-25">
+        <span class="prompt-prefix" aria-hidden="true">&gt;</span>
         <span>ls ~/projects</span>
-      </div>
+      </h1>
       <ul class="flex flex-col gap-12">
         <li
           v-for="(project, index) in PROJECTS"
@@ -19,7 +19,7 @@
               external
               class="project-link"
             >
-              {{ project.name }}
+              {{ project.name }}<span class="sr-only"> (opens in new tab)</span>
             </NuxtLink>
             <p v-else class="text-green">{{ project.name }}</p>
 
@@ -31,11 +31,11 @@
             type="button"
             class="w-full sm:w-44 h-28 sm:h-28 shrink-0 cursor-zoom-in"
             :aria-label="`Preview image for ${project.name}`"
-            @click="previewProject = project"
+            @click="openPreview(project, $event)"
           >
             <NuxtImg
               :src="project.image"
-              :alt="project.name"
+              alt=""
               width="200"
               class="w-full h-full object-cover"
             />
@@ -45,27 +45,30 @@
     </div>
 
     <Teleport to="body">
-      <div
-        v-if="previewProject"
-        class="image-preview-overlay"
-        @click="previewProject = null"
+      <dialog
+        ref="previewDialog"
+        class="image-preview-overlay m-0 max-w-none max-h-none border-0"
+        :aria-label="previewProject ? `Preview: ${previewProject.name}` : 'Image preview'"
+        @click="closePreview"
+        @close="handleDialogClose"
       >
         <button
           type="button"
           class="image-preview-close"
           aria-label="Close preview"
-          @click="previewProject = null"
+          @click="closePreview"
         >
           ✕
         </button>
         <NuxtImg
+          v-if="previewProject"
           :src="previewProject.image"
           :alt="previewProject.name"
           width="1200"
           class="image-preview-img"
           @click.stop
         />
-      </div>
+      </dialog>
     </Teleport>
   </section>
 </template>
@@ -76,4 +79,22 @@ import { PROJECTS, TABS, type Project } from '~/constants';
 usePageStructuredData(TABS.projects.stucturedData)
 
 const previewProject = ref<Project | null>(null)
+const previewDialog = ref<HTMLDialogElement | null>(null)
+let previewTrigger: HTMLElement | null = null
+
+function openPreview(project: Project, event: MouseEvent) {
+  previewTrigger = event.currentTarget as HTMLElement
+  previewProject.value = project
+  previewDialog.value?.showModal()
+}
+
+function closePreview() {
+  previewDialog.value?.close()
+}
+
+// Fires on close(), Escape, or native cancel — keeps state in sync either way.
+function handleDialogClose() {
+  previewProject.value = null
+  previewTrigger?.focus()
+}
 </script>
