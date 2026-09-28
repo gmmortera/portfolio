@@ -1,56 +1,11 @@
-export const TABS = {
-  home: {
-    title: '~/',
-    path: '/',
-    stucturedData: {
-      type: 'HomePage',
-      id: 'https://www.gmmortera.com/#home',
-      url: 'https://www.gmmortera.com/',
-      name: 'Gianfranco Mortera | Full-stack Engineer',
-      description: 'Gianfranco Mortera — frontend engineer by day, pixel artist by night. Building for the web from Cebu, PH, and currently learning game dev.',
-      isPartOf: 'https://www.gmmortera.com/#website',
-      publisher: 'https://www.gmmortera.com/#person'
-    }
-  },
-  about: {
-    title: '~/experience',
-    path: '/experience',
-    stucturedData: {
-      type: 'ProfilePage',
-      id: 'https://www.gmmortera.com/#experience',
-      url: 'https://www.gmmortera.com/experience',
-      name: 'Experience - Gianfranco Mortera | Full-stack Engineer',
-      description: 'Work history and achievements — Gianfranco Mortera, full-stack developer crafting clean, interactive, and meaningful digital experiences from Cebu, PH.',
-      isPartOf: 'https://www.gmmortera.com/#website',
-      publisher: 'https://www.gmmortera.com/#person'
-    }
-  },
-  projects: {
-    title: '~/projects',
-    path: '/projects',
-    stucturedData: {
-      type: 'CollectionPage',
-      id: 'https://www.gmmortera.com/#projects',
-      url: 'https://www.gmmortera.com/projects',
-      name: 'Projects - Gianfranco Mortera | Full-stack Engineer',
-      description: 'Client and personal projects by Gianfranco Mortera — full-stack developer crafting clean, interactive, and meaningful digital experiences from Cebu, PH.',
-      isPartOf: 'https://www.gmmortera.com/#website',
-      publisher: 'https://www.gmmortera.com/#person'
-    }
-  },
-  // pixels: {
-  //   title: '~/pixels',
-  //   path: '/pixels',
-  //   stucturedData: {
-  //     type: 'CollectionPage',
-  //     id: 'https://www.gmmortera.com/#pixels',
-  //     url: 'https://www.gmmortera.com/pixels',
-  //     name: 'Pixel Art - Gianfranco Mortera | Full-stack Engineer',
-  //     description: 'The night shift — sprites, tiles, and tiny worlds by Gianfranco Mortera.',
-  //     isPartOf: 'https://www.gmmortera.com/#website',
-  //     publisher: 'https://www.gmmortera.com/#person'
-  //   }
-  // },
+export const HOME_STRUCTURED_DATA = {
+  type: 'ProfilePage',
+  id: 'https://www.gmmortera.com/#home',
+  url: 'https://www.gmmortera.com/',
+  name: 'Gianfranco Mortera | Full-stack Engineer',
+  description: 'Gianfranco Mortera — frontend engineer by day, pixel artist by night. Work history and client and personal projects, built from Cebu, PH.',
+  isPartOf: 'https://www.gmmortera.com/#website',
+  publisher: 'https://www.gmmortera.com/#person'
 }
 
 export const WORK_EXPERIENCES = [
@@ -94,6 +49,7 @@ export interface Project {
   id: string
   name: string
   image?: string
+  images?: string[]  // extra screenshots, paged with ◀ ▶ in the home gallery
   description: string
   link?: string
 }
@@ -114,6 +70,10 @@ export const ART_CATEGORIES: { key: ArtCategory, label: string }[] = [
   { key: 'character-design', label: 'character-design' },
   { key: 'other', label: 'other' },
 ]
+
+// Shown in the home gallery. While empty, the gallery falls back to PROJECTS screenshots.
+// TODO: add pixel art pieces (files under /public/pixels)
+export const ART_PIECES: ArtPiece[] = []
 
 export const PROJECTS: Project[] = [
   {
@@ -150,5 +110,26 @@ export const PROJECTS: Project[] = [
     image: '/dev-projects/karakoa-solutions.png',
     description: 'A Philippine-based team providing recurring IT, virtual assistant (VA), and executive assistant (EA) services. The team is coordinated by a single lead to minimize handoffs and streamline project management.',
     link: 'https://www.karakoa-solutions.com/',
-  }
+  },
+  {
+    id: 'immuno-serology-tracker',
+    name: 'Immuno Serology Tracker',
+    image: '/dev-projects/immuno-serology-tracker.png',
+    description: 'An inventory tracker for an immuno-serology lab. Every reagent and kit is logged by lot number with its expiry status, low-stock and expiring-soon filters surface what needs reordering, and each lot keeps a full history of stock changes.',
+    link: 'https://immuno-serology-tracker-production.up.railway.app/',
+  },
+  {
+    id: 'aesthetiq',
+    name: 'aesthetiq',
+    image: '/dev-projects/aesthetiq.png',
+    description: 'An iOS app I\'m currently building: snap your clothes, pick an aesthetic, and the AI curates a look from what you already own, then renders it photo-realistically. The landing page is live with a waitlist for early access.',
+    link: 'https://www.aesthetiq.site/',
+  },
+  {
+    id: 'studyhub',
+    name: 'StudyHub',
+    image: '/dev-projects/studyhub.png',
+    description: 'A mock website built for a client: a study-room booking app that shows which rooms are available right now, lets students book one with a single tap, and cancel a booking later.',
+    link: 'https://studyhub-production-e29f.up.railway.app/',
+  },
 ]

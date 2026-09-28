@@ -18,12 +18,10 @@ export default defineNuxtConfig({
       },
       link: [
         { href: 'https://actionnetwork.org/css/style-embed-v3.css', rel: 'stylesheet', type: 'text/css' },
-        { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
+        { rel: "icon", href: "/favicon.ico", sizes: "any" },
         { rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png" },
         { rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png" },
-        { rel: "icon", type: "image/x-icon", href: "/favicon-light.svg", media: "(prefers-color-scheme: light)" },
-        { rel: "icon", type: "image/x-icon", href: "/favicon-dark.svg", media: "(prefers-color-scheme: dark)" },
-
+        { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png" },
         { rel: "manifest", href: "/site.webmanifest" }
       ],
       script: [
@@ -32,46 +30,30 @@ export default defineNuxtConfig({
     }
   },
 
+  // the site used to have separate pages; send old links and search results to the one-page home
+  routeRules: {
+    '/experience': { redirect: { to: '/', statusCode: 301 } },
+    '/projects': { redirect: { to: '/', statusCode: 301 } },
+  },
+
   robots: {
     sitemap: `${SITE_URL}/sitemap.xml`,
   },
 
-  css: [
-    "~/assets/css/main.css",
-    "animate.css"
-  ],
+  css: ["~/assets/css/main.css"],
 
   fonts: {
     families: [
-      { name: 'Roboto', weights: [400, 500, 700, 900] },
-      { name: 'Inter', weights: [300, 400, 500] }
+      { name: 'IBM Plex Mono', weights: [400] }
     ]
   },
 
-  image: {
-    domains: [process.env.NUXT_PUBLIC_STRAPI_URL?.replace(/^https?:\/\//, "") || ""]
-  },
-
   modules: [
-    "@nuxtjs/color-mode",
-    "@nuxt/icon",
     "@nuxt/fonts",
     "@nuxt/image",
     "@vueuse/nuxt",
     "@nuxtjs/robots"
   ],
-
-  router: {
-    options: {
-      scrollBehaviorType: "smooth"
-    }
-  },
-
-  runtimeConfig: {
-    public: {
-      strapiUrl: "https://outgoing-gift-55fe021e6b.strapiapp.com"
-    }
-  },
 
   vite: {
     plugins: [tailwindcss()]

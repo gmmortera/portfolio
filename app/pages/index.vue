@@ -1,65 +1,68 @@
 <template>
-  <section id="home" class="grid grid-cols-1 lg:grid-cols-2 relative">
-    <!-- <div id='can-petition-area-reject-pax-silica-and-us-israeli-expansion-in-the-philippines' style='width: 100%; height: 25%;'></div> -->
-    <div class="pt-24 px-6 pb-12 sm:pt-28 sm:px-10 lg:pt-50 lg:pl-50 lg:pr-16 lg:pb-0 flex flex-col gap-5">
-      <p class="anim-1 text-eyebrow">available for collaboration</p>
-      <h1 class="anim-2">I <span class="text-green">build</span> things<br>for the web.</h1>
-      <h2 class="anim-3 text-body-muted max-w-full sm:max-w-4/5">Hey, I am <span class="text-green">Gianfranco Mortera</span> frontend engineer by day, <span class="text-green">pixel artist</span> by night. Crafting clean, interactive experiences from Cebu, PH.</h2>
-      <div class="anim-4 flex flex-wrap gap-4">
-        <NuxtLink to="/projects" class="hover:text-green hover:cursor-pointer">see my work</NuxtLink>
-        <span aria-hidden="true">*</span>
-        <NuxtLink to="/experience" class="hover:text-green hover:cursor-pointer">about me</NuxtLink>
+  <!-- three columns on desktop, each scrolling on its own; wheel scrolling chains left → right (useSequentialScroll) -->
+  <div ref="columnsRef" class="lg:grid lg:grid-cols-[minmax(16rem,1fr)_3fr] lg:h-dvh lg:overflow-hidden">
+    <AppSidebar data-scroll-column class="lg:h-dvh lg:overflow-y-auto lg:overscroll-contain scrollbar-none border-b border-border lg:border-b-0 lg:border-r" />
+
+    <main id="main-content" tabindex="-1" class="min-w-0 lg:grid lg:grid-cols-[1fr_2fr] lg:h-dvh lg:overflow-hidden">
+      <h1 class="sr-only">Gianfranco Mortera — frontend engineer and pixel artist</h1>
+
+      <ExperienceFeed data-scroll-column class="lg:h-dvh lg:overflow-y-auto lg:overscroll-contain scrollbar-none border-b border-border lg:border-b-0 lg:border-r" />
+
+      <div data-scroll-column class="lg:h-dvh lg:overflow-y-auto lg:overscroll-contain scrollbar-none flex flex-col gap-12 px-6 py-8 sm:px-10 lg:px-7 lg:py-7">
+        <figure class="anim-2 flex flex-col gap-3">
+          <div class="grid place-items-center overflow-hidden bg-surface aspect-4/3">
+            <!-- 3x3 pixel-grid logomark (same motif as the /public favicon); center cell left empty -->
+            <div ref="logoMarkRef" class="grid grid-cols-3 grid-rows-3 gap-5 w-[clamp(180px,20vw,320px)] aspect-square" aria-hidden="true">
+              <template v-for="(cell, i) in LOGO_CELLS" :key="i">
+                <span v-if="!cell" />
+                <!-- outer layer drifts via CSS; inner layer is pushed by JS so the two transforms never fight -->
+                <span
+                  v-else
+                  class="block size-full animate-drift"
+                  :style="{ animationDuration: cell.duration, animationDelay: cell.delay, animationDirection: cell.reverse ? 'reverse' : undefined }"
+                >
+                  <span data-push class="block size-full">
+                    <!-- clip-path would clip the glow too, so the cut cell is SVG geometry with a drop-shadow that follows its silhouette -->
+                    <svg v-if="cell.cut" class="block size-full animate-mark-glow-cut" viewBox="0 0 100 100" preserveAspectRatio="none">
+                      <polygon class="fill-white" points="0,0 100,0 0,100" />
+                    </svg>
+                    <span v-else class="block size-full bg-white animate-mark-glow" />
+                  </span>
+                </span>
+              </template>
+            </div>
+          </div>
+          <figcaption class="text-sm">logomark — drifts in zero gravity, dodges your cursor</figcaption>
+        </figure>
+
+        <WorkGallery />
       </div>
-      <div class="flex flex-col mt-12 lg:mt-20 anim-6">
-        <p>
-          <NuxtLink
-            to="mailto:gfmmortera@gmail.com"
-          >
-           <span class="hover:text-green">gfmmortera@gmail.com</span>
-          </NuxtLink>
-        </p>
-        <p>
-          <NuxtLink
-            to="https://github.com/gmmortera"
-            target="_blank"
-            external
-          >
-           <span class="hover:text-green">github<span class="sr-only"> (opens in new tab)</span></span>
-          </NuxtLink>
-        </p>
-        <p class="cursor">
-          <NuxtLink
-            to="https://www.linkedin.com/in/gianfranco-mortera-93a494282"
-            target="_blank"
-            external
-          >
-            <span class="hover:text-green">linkedin<span class="sr-only"> (opens in new tab)</span></span>
-          </NuxtLink>
-        </p>
-      </div>
-    </div>
-    <div class="hidden lg:grid place-items-center anim-5">
-      <div ref="logoMarkRef" class="logo-mark gap-5" aria-hidden="true">
-        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
-        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
-        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><svg class="logo-mark-cell-cut" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon class="logo-mark-cell-cut-fill" points="0,0 100,0 0,100" /></svg></span></span>
-        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
-        <span />
-        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
-        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
-        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
-        <span class="logo-mark-cell-float"><span class="logo-mark-cell-push"><span class="logo-mark-cell" /></span></span>
-      </div>
-    </div>
-  </section>
+    </main>
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { TABS } from '~/constants'
+import { HOME_STRUCTURED_DATA } from '~/constants'
 
-usePageStructuredData(TABS.home.stucturedData)
+usePageStructuredData(HOME_STRUCTURED_DATA)
+
+const columnsRef = ref<HTMLElement | null>(null)
+useSequentialScroll(columnsRef)
 
 const logoMarkRef = ref<HTMLElement | null>(null)
+
+// each cell drifts on its own cycle so the mark reads as loose debris rather than one rigid shape
+const LOGO_CELLS = [
+  { duration: '8s', delay: '-1s' },
+  { duration: '10.5s', delay: '-3s', reverse: true },
+  { duration: '7.5s', delay: '-5s', cut: true },
+  { duration: '11s', delay: '-2s', reverse: true },
+  null,
+  { duration: '9.5s', delay: '-4.5s' },
+  { duration: '12s', delay: '-6s', reverse: true },
+  { duration: '8.5s', delay: '-2.5s' },
+  { duration: '10s', delay: '-1.5s', reverse: true },
+]
 
 const PUSH_RADIUS = 130
 const PUSH_STRENGTH = 34
@@ -111,7 +114,7 @@ onMounted(() => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
   if (!logoMarkRef.value) return
 
-  pushEls = Array.from(logoMarkRef.value.querySelectorAll<HTMLElement>('.logo-mark-cell-push'))
+  pushEls = Array.from(logoMarkRef.value.querySelectorAll<HTMLElement>('[data-push]'))
   pushState = pushEls.map(() => ({ x: 0, y: 0 }))
 
   window.addEventListener('pointermove', onPointerMove, { passive: true })
