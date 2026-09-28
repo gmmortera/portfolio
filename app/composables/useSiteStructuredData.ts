@@ -11,7 +11,7 @@ export const useSiteStructuredData = () => {
               '@id': 'https://www.gmmortera.com/#website',
               'url': 'https://www.gmmortera.com/',
               'name': 'Gianfranco Mortera | Full-stack Engineer',
-              'description': 'Gianfranco Mortera — frontend engineer by day, pixel artist by night. Building for the web from Cebu, PH, and currently learning game dev.',
+              'description': 'Gianfranco Mortera — full-stack engineer by day, pixel artist by night. Building for the web from Cebu, PH, and currently learning game dev.',
               'publisher': { '@id': 'https://www.gmmortera.com/#person' }
             },
             {
@@ -19,7 +19,7 @@ export const useSiteStructuredData = () => {
               '@id': 'https://www.gmmortera.com/#person',
               'name': 'Gianfranco Mortera',
               'url': 'https://www.gmmortera.com/',
-              'jobTitle': 'Frontend Engineer',
+              'jobTitle': 'Full-stack Engineer',
               'image': 'https://www.gmmortera.com/og-image.png',
               'sameAs': [
                 'https://github.com/gmmortera',

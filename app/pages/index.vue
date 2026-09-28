@@ -4,7 +4,7 @@
     <AppSidebar data-scroll-column class="lg:h-dvh lg:overflow-y-auto lg:overscroll-contain scrollbar-none border-b border-border lg:border-b-0 lg:border-r" />
 
     <main id="main-content" tabindex="-1" class="min-w-0 lg:grid lg:grid-cols-[1fr_2fr] lg:h-dvh lg:overflow-hidden">
-      <h1 class="sr-only">Gianfranco Mortera — frontend engineer and pixel artist</h1>
+      <h1 class="sr-only">Gianfranco Mortera — full-stack engineer and pixel artist</h1>
 
       <ExperienceFeed data-scroll-column class="lg:h-dvh lg:overflow-y-auto lg:overscroll-contain scrollbar-none border-b border-border lg:border-b-0 lg:border-r" />
 

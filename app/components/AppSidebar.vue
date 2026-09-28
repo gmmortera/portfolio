@@ -15,7 +15,7 @@
     </NuxtLink>
 
     <p class="anim-2 leading-7 max-w-[34ch]">
-      frontend engineer by day, <span class="text-green">pixel artist</span> by night.
+      full-stack engineer by day, <span class="text-green">pixel artist</span> by night.
       crafting clean, interactive experiences from cebu, ph.
     </p>
 

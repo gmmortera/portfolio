@@ -3,7 +3,7 @@ export const HOME_STRUCTURED_DATA = {
   id: 'https://www.gmmortera.com/#home',
   url: 'https://www.gmmortera.com/',
   name: 'Gianfranco Mortera | Full-stack Engineer',
-  description: 'Gianfranco Mortera — frontend engineer by day, pixel artist by night. Work history and client and personal projects, built from Cebu, PH.',
+  description: 'Gianfranco Mortera — full-stack engineer by day, pixel artist by night. Work history and client and personal projects, built from Cebu, PH.',
   isPartOf: 'https://www.gmmortera.com/#website',
   publisher: 'https://www.gmmortera.com/#person'
 }
@@ -18,6 +18,16 @@ export const WORK_EXPERIENCES = [
       'Building and maintaining frontend features for a health and wellness platform serving thousands of users.',
       'Collaborating with cross-functional teams to align UI implementation with business and compliance requirements.',
       'Contributed to scalable component architecture and improved developer experience across the codebase.',
+    ],
+  },
+  {
+    type: 'freelance',
+    period: '2024',
+    company: 'Independent Contractor',
+    title: 'Freelance Web Developer',
+    achievements: [
+      'Developed a responsive mockup website using Nuxt and WordPress integration, delivered on time and within budget.',
+      'Translated client business requirements into technical specifications and a user-friendly interface design.',
     ],
   },
   {
