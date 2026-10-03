@@ -87,13 +87,6 @@ export const ART_PIECES: ArtPiece[] = []
 
 export const PROJECTS: Project[] = [
   {
-    id: "comprehensive-time-manager",
-    name: "ClockMe",
-    image: "/dev-projects/clockme.png",
-    description: "A sophisticated time management application featuring AI-powered analytics and real-time dashboards. Developed for a startup company with direct collaboration with Japan-based stakeholders.",
-    link: 'https://clock.me/',
-  },
-  {
     id: 'comic-silo',
     name: 'Comic Silo',
     image: '/dev-projects/comic-silo.png',
@@ -106,6 +99,20 @@ export const PROJECTS: Project[] = [
     image: '/dev-projects/govcheck-ph.png',
     description: 'A civic tech web app that monitors the speed, uptime, and usability of Philippine government websites (.gov.ph domains). It serves two audiences: Filipino citizens quickly check if a gov site is down or slow before wasting time Government accountability public leaderboard and incident history to pressure agencies to improve',
     link: 'https://govcheck-ph.vercel.app/',
+  },
+  {
+    id: "comprehensive-time-manager",
+    name: "ClockMe",
+    image: "/dev-projects/clockme.png",
+    description: "A sophisticated time management application featuring AI-powered analytics and real-time dashboards. Developed for a startup company with direct collaboration with Japan-based stakeholders.",
+    link: 'https://clock.me/',
+  },
+  {
+    id: 'studyhub',
+    name: 'StudyHub',
+    image: '/dev-projects/studyhub.png',
+    description: 'A mock website built for a client: a study-room booking app that shows which rooms are available right now, lets students book one with a single tap, and cancel a booking later.',
+    link: 'https://studyhub-production-e29f.up.railway.app/',
   },
   {
     id: 'layer-lab-cebu',
@@ -134,12 +141,5 @@ export const PROJECTS: Project[] = [
     image: '/dev-projects/aesthetiq.png',
     description: 'An iOS app I\'m currently building: snap your clothes, pick an aesthetic, and the AI curates a look from what you already own, then renders it photo-realistically. The landing page is live with a waitlist for early access.',
     link: 'https://www.aesthetiq.site/',
-  },
-  {
-    id: 'studyhub',
-    name: 'StudyHub',
-    image: '/dev-projects/studyhub.png',
-    description: 'A mock website built for a client: a study-room booking app that shows which rooms are available right now, lets students book one with a single tap, and cancel a booking later.',
-    link: 'https://studyhub-production-e29f.up.railway.app/',
   },
 ]
