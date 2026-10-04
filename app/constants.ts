@@ -94,6 +94,13 @@ export const PROJECTS: Project[] = [
     link: 'https://www.comicsilo.com/',
   },
   {
+    id: 'avatar-showcase',
+    name: 'Avatar Showcase',
+    image: '/dev-projects/avatar-showcase.png',
+    description: 'A platform to create avatars and chat casually with people on the internet. Music, art and easter eggs are integrated into the experience.',
+    link: 'https://avatar-showcase-production.up.railway.app/',
+  },
+  {
     id: 'website-performance-checker',
     name: 'GovCheck',
     image: '/dev-projects/govcheck-ph.png',
