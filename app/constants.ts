@@ -101,13 +101,6 @@ export const PROJECTS: Project[] = [
     link: 'https://avatar-showcase-production.up.railway.app/',
   },
   {
-    id: 'website-performance-checker',
-    name: 'GovCheck',
-    image: '/dev-projects/govcheck-ph.png',
-    description: 'A civic tech web app that monitors the speed, uptime, and usability of Philippine government websites (.gov.ph domains). It serves two audiences: Filipino citizens quickly check if a gov site is down or slow before wasting time Government accountability public leaderboard and incident history to pressure agencies to improve',
-    link: 'https://govcheck-ph.vercel.app/',
-  },
-  {
     id: "comprehensive-time-manager",
     name: "ClockMe",
     image: "/dev-projects/clockme.png",
@@ -127,13 +120,6 @@ export const PROJECTS: Project[] = [
     image: '/dev-projects/layer-lab-cebu.png',
     description: 'A production website for a Cebu-based 3D printing studio, designed, built, and deployed end to end as freelance client work. Nuxt on the frontend, Tailwind for the design system, deployed on Vercel.',
     link: 'https://layerlabcebu.com/',
-  },
-  {
-    id: 'karakoa-solutions',
-    name: 'Karakoa Solutions',
-    image: '/dev-projects/karakoa-solutions.png',
-    description: 'A Philippine-based team providing recurring IT, virtual assistant (VA), and executive assistant (EA) services. The team is coordinated by a single lead to minimize handoffs and streamline project management.',
-    link: 'https://www.karakoa-solutions.com/',
   },
   {
     id: 'immuno-serology-tracker',
