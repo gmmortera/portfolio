@@ -10,14 +10,15 @@ export const HOME_STRUCTURED_DATA = {
 
 export const WORK_EXPERIENCES = [
   {
-    type: 'winona',
-    period: '2025–Present',
-    company: 'Winona',
-    title: 'Frontend Engineer',
+    type: 'telehealth',
+    period: 'Oct 2025–Present',
+    company: 'US-based women\'s health telehealth startup',
+    title: 'Frontend Developer (Contract)',
     achievements: [
-      'Building and maintaining frontend features for a health and wellness platform serving thousands of users.',
-      'Collaborating with cross-functional teams to align UI implementation with business and compliance requirements.',
-      'Contributed to scalable component architecture and improved developer experience across the codebase.',
+      'Building user interfaces for a telehealth platform, translating product requirements into responsive, accessible UI.',
+      'Optimizing frontend performance to keep pages fast and interactions smooth.',
+      'Developing reusable component libraries that improve consistency and developer experience across the codebase.',
+      'Ensuring cross-browser compatibility and conducting code reviews to maintain code quality.',
     ],
   },
   {
