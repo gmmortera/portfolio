@@ -70,10 +70,12 @@ export type ArtCategory = 'other' | 'character-design' | 'in-game'
 export interface ArtPiece {
   id: string
   title: string
-  file: string     // e.g. '/pixels/island-dusk.png'
-  size: string     // canvas size, e.g. '64x64'
-  year: string
+  file: string     // e.g. '/pixel-arts/island-dusk.png'
   category: ArtCategory
+  size?: string    // canvas size, e.g. '64x64'
+  year?: string
+  width: number    // intrinsic px size; /pixel-art uses the ratio to size tiles so nothing is cropped or letterboxed
+  height: number
 }
 
 export const ART_CATEGORIES: { key: ArtCategory, label: string }[] = [
@@ -82,9 +84,18 @@ export const ART_CATEGORIES: { key: ArtCategory, label: string }[] = [
   { key: 'other', label: 'other' },
 ]
 
-// Shown in the home gallery. While empty, the gallery falls back to PROJECTS screenshots.
-// TODO: add pixel art pieces (files under /public/pixels)
-export const ART_PIECES: ArtPiece[] = []
+// Home shows the first HOME_PREVIEW_COUNT; /pixel-art shows all as a bento grid.
+export const HOME_PREVIEW_COUNT = 3
+
+export const ART_PIECES: ArtPiece[] = [
+  { id: 'match-stick', title: 'Match Stick', file: '/pixel-arts/match-stick.png', category: 'other', width: 772, height: 584 },
+  { id: 'game-concept', title: 'Game Concept', file: '/pixel-arts/game-concept.png', category: 'in-game', width: 960, height: 800 },
+  { id: 'energy', title: 'Energy', file: '/pixel-arts/energy.png', category: 'in-game', width: 384, height: 288 },
+  { id: 'verdant', title: 'Verdant', file: '/pixel-arts/verdant.png', category: 'other', width: 810, height: 960 },
+  { id: 'blood-queen', title: 'Blood Queen', file: '/pixel-arts/blood-queen.png', category: 'character-design', width: 564, height: 576 },
+  { id: 'broken-blade', title: 'Broken Blade', file: '/pixel-arts/broken-blade.png', category: 'in-game', width: 370, height: 380 },
+  { id: 'demien', title: 'Demien', file: '/pixel-arts/demien.png', category: 'character-design', width: 320, height: 360 },
+]
 
 export const PROJECTS: Project[] = [
   {

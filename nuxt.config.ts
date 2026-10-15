@@ -30,10 +30,9 @@ export default defineNuxtConfig({
     }
   },
 
-  // the site used to have separate pages; send old links and search results to the one-page home
+  // the site used to have a separate experience page; send old links and search results home
   routeRules: {
     '/experience': { redirect: { to: '/', statusCode: 301 } },
-    '/projects': { redirect: { to: '/', statusCode: 301 } },
   },
 
   robots: {
