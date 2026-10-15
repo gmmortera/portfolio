@@ -4,12 +4,7 @@
 
 @variant dark (&:where(.dark, .dark *));
 
-/* ─────────────────────────────────────────────
-   1. @theme — single source of truth for tokens.
-   Every entry becomes a utility: bg-surface,
-   text-muted, border-green-dim, font-display,
-   text-label, animate-drift, …
-   ───────────────────────────────────────────── */
+/* Theme tokens; each entry becomes a utility (bg-surface, text-label, animate-drift, …) */
 @theme {
   /* Surfaces */
   --color-bg:             #0A0A0A;
@@ -98,9 +93,6 @@
 }
 
 
-/* ─────────────────────────────────────────────
-   2. @layer base — element defaults only
-   ───────────────────────────────────────────── */
 @layer base {
   html {
     scrollbar-width: none;
@@ -136,11 +128,6 @@
   }
 }
 
-
-/* ─────────────────────────────────────────────
-   3. Custom utilities — only what Tailwind
-   can't express as a single class
-   ───────────────────────────────────────────── */
 
 /* Hide scrollbars but keep scrolling (needs the ::-webkit-scrollbar pseudo) */
 @utility scrollbar-none {
